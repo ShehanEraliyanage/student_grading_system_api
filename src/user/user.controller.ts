@@ -1,18 +1,28 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
-import { UserService } from './user.service';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  UsePipes,
+} from '@nestjs/common';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 
+import { UserService } from './user.service';
+import { ClassValidationPipe } from 'src/common/pipes/class-validation.pipe';
+
+import { UserAddDto } from './dto/userAdd.dto';
+
+@ApiTags('users')
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  // Endpoint to add a new user
   @Post()
-  async create(
-    @Body('name') name: string,
-    @Body('email') email: string,
-    @Body('password') password: string,
-  ) {
-    return this.userService.create(name, email, password);
+  @UsePipes(ClassValidationPipe)
+  async create(@Body() userAddingDto: UserAddDto) {
+    return this.userService.create(userAddingDto);
   }
 
   // Endpoint to get all users
