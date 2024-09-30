@@ -1,0 +1,8 @@
+server:
+  port: 5005
+  hostedDomain: 'localhost:5005'
+  saltSecret: '$2b$10$2ewfsddsadsdad'
+
+jwt:
+  secret: 'b75a0043c2f9de74f2fb3649b610b6dsadasdfqewdwe21e3er12esdad71'
+  saltRounds: 10
