@@ -19,11 +19,25 @@ export class UserService {
     userAddDto.createdAt = new Date();
     userAddDto.updatedAt = new Date();
 
-    // Create a new user instance with the hashed password
     const newUser = new this.userModel(userAddDto);
 
     // Save the user to the database and return the saved user
     return newUser.save();
+  }
+
+  async getUserById(_id: string): Promise<UserDocument> {
+    try {
+      const user = await this.userModel.findById(_id);
+
+      if (!user) {
+        throw new NotFoundException(
+          `User with ID ${_id} not found in the database`,
+        );
+      }
+      return user;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async findAll(): Promise<User[]> {
