@@ -6,3 +6,6 @@ server:
 jwt:
   secret: 'b75a0043c2f9de74f2fb3649b610b6dsadasdfqewdwe21e3er12esdad71'
   saltRounds: 10
+
+logger:
+  logToFile: false
