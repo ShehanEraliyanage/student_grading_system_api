@@ -3,12 +3,19 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UserService } from '../user/user.service';
 import { UserDocument } from 'src/user/schemas/user.schema';
+import { UserSession } from 'src/user/schemas/user.session.schema';
+
+import { IJWT } from './interfaces/local-login-return.interface';
+
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
+    @InjectModel(UserSession.name) private userSessionModel: Model<UserSession>,
   ) {}
 
   async validateUser(email: string, password: string): Promise<UserDocument> {
@@ -33,7 +40,19 @@ export class AuthService {
   }
 
   async login(user: UserDocument) {
-    const payload = { username: user.email, sub: user._id.toString() }; // Convert ObjectId to string
+    const userSession = new this.userSessionModel({
+      userId: user.id,
+      createdAt: new Date(),
+    });
+    console.log('🚀 ~ AuthService ~ login ~ userSession:', userSession);
+    await userSession.save();
+
+    const payload: IJWT = {
+      email: user.email,
+      sub: user._id.toString(),
+      sessionId: userSession._id.toString(),
+    };
+    console.log('🚀 ~ AuthService ~ login ~ payload:', payload);
     // Generate and return a JWT token
     return {
       access_token: this.jwtService.sign(payload),
