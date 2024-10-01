@@ -5,6 +5,7 @@ import * as bcrypt from 'bcrypt';
 
 import { UserAddDto } from './dto/userAdd.dto';
 import { User, UserDocument } from './schemas/user.schema';
+import { IReqUserInfo } from 'src/auth/interfaces/req-user-Info.interface';
 
 const SALT_ROUNDS = 10;
 
@@ -38,6 +39,20 @@ export class UserService {
     } catch (error) {
       throw error;
     }
+  }
+
+  async userMe(reqUser: IReqUserInfo): Promise<UserDocument> {
+    const user = await this.userModel.findOne({
+      _id: reqUser.userId,
+    });
+
+    if (!user) {
+      throw new NotFoundException(
+        `User with ID ${reqUser.userId} not found in the database`,
+      );
+    }
+
+    return user;
   }
 
   async findAll(): Promise<User[]> {
