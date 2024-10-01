@@ -12,7 +12,7 @@ import { User, UserSchema } from 'src/user/schemas/user.schema';
 import {
   UserSession,
   UserSessionSchema,
-} from 'src/user/schemas/user.session.schema';
+} from '../user/schemas/user.session.schema';
 import { PassportModule } from '@nestjs/passport';
 import { jwtConfig } from 'src/config/jwt.config';
 import { JwtStrategy } from './jwt.strategy';

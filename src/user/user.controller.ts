@@ -12,11 +12,11 @@ import {
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 
 import { UserService } from './user.service';
-import { ClassValidationPipe } from 'src/common/pipes/class-validation.pipe';
+import { ClassValidationPipe } from '../common/pipes/class-validation.pipe';
 import { JwtAuthGuard } from './../auth/jwt-auth.guard';
 import { UserDocument } from './schemas/user.schema';
-import { GetUser } from 'src/common/decorators/get-user.decorator';
-import { IReqUserInfo } from 'src/auth/interfaces/req-user-Info.interface';
+import { GetUser } from '../common/decorators/get-user.decorator';
+import { IReqUserInfo } from '../auth/interfaces/req-user-info.interface';
 import { SanitizeMongooseModelInterceptor } from 'nestjs-mongoose-exclude';
 
 import { UserAddDto } from './dto/userAdd.dto';

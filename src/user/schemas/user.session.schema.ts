@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Model, Schema as MongooseSchema } from 'mongoose';
-import { CreateUserSessionDto } from 'src/auth/dto/user-session.dto';
+import { CreateUserSessionDto } from '../../auth/dto/user-session.dto';
 
 export type UserSessionDocument = UserSession & Document;
 export interface IUserSessionModel extends Model<UserSessionDocument> {

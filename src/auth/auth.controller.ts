@@ -17,7 +17,7 @@ import { LocalAuthGuard } from './local.auth.guard';
 // import { ClassValidationPipe } from 'src/common/pipes/class-validation.pipe';
 // import { JwtAuthGuard } from './jwt-auth.guard';
 // import { ClassValidationNoWhiteListedPipe } from 'src/common/pipes/class-validation-no-whitelisted.pipe';
-import { UserService } from 'src/user/user.service';
+import { UserService } from '../user/user.service';
 import { ApiTags } from '@nestjs/swagger'; //ApiBearerAuth, ApiCreatedResponse,
 // import { GetUser } from 'src/common/decorators/get-user.decorator';
 // import { ILocalLoginReturn } from './interfaces/local-login-return.interface';

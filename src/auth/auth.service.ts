@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UserService } from '../user/user.service';
 import { UserDocument } from 'src/user/schemas/user.schema';
-import { UserSession } from 'src/user/schemas/user.session.schema';
+import { UserSession } from '../user/schemas/user.session.schema';
 
 import { IJWT } from './interfaces/local-login-return.interface';
 
@@ -44,15 +44,13 @@ export class AuthService {
       userId: user.id,
       createdAt: new Date(),
     });
-    console.log('🚀 ~ AuthService ~ login ~ userSession:', userSession);
     await userSession.save();
 
     const payload: IJWT = {
       email: user.email,
       sub: user._id.toString(),
-      sessionId: userSession._id.toString(),
+      sessionId: userSession._id?.toString(),
     };
-    console.log('🚀 ~ AuthService ~ login ~ payload:', payload);
     // Generate and return a JWT token
     return {
       access_token: this.jwtService.sign(payload),
