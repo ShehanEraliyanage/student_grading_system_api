@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt';
 
 import { UserAddDto } from './dto/userAdd.dto';
 import { User, UserDocument } from './schemas/user.schema';
-import { IReqUserInfo } from 'src/auth/interfaces/req-user-Info.interface';
+import { IReqUserInfo } from '../auth/interfaces/req-user-info.interface';
 
 const SALT_ROUNDS = 10;
 

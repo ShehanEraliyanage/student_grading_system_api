@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
+import { NotFoundException } from '@nestjs/common';
 
 describe('UserController', () => {
   let controller: UserController;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let service: UserService;
 
   const mockUser = {
@@ -36,26 +36,34 @@ describe('UserController', () => {
   });
 
   it('should create a new user', async () => {
-    const user = await controller.create(
-      'Test User',
-      'testuser@example.com',
-      'password123',
-    );
+    const user = await controller.create(mockUser);
     expect(user).toEqual(mockUser);
+    expect(mockUserService.create).toHaveBeenCalledWith(mockUser);
   });
 
   it('should return all users', async () => {
     const users = await controller.findAll();
     expect(users).toEqual([mockUser]);
+    expect(mockUserService.findAll).toHaveBeenCalled();
   });
 
   it('should return a single user by id', async () => {
     const user = await controller.findOne('someId');
     expect(user).toEqual(mockUser);
+    expect(mockUserService.findOne).toHaveBeenCalledWith('someId');
   });
 
   it('should delete a user by id', async () => {
     const user = await controller.delete('someId');
     expect(user).toEqual(mockUser);
+    expect(mockUserService.delete).toHaveBeenCalledWith('someId');
+  });
+
+  it('should throw an error if user not found', async () => {
+    mockUserService.findOne.mockRejectedValueOnce(new NotFoundException());
+
+    await expect(controller.findOne('nonExistentId')).rejects.toThrow(
+      NotFoundException,
+    );
   });
 });

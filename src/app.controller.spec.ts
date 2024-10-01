@@ -14,9 +14,14 @@ describe('AppController', () => {
     appController = app.get<AppController>(AppController);
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+  describe('getAlive', () => {
+    it('should return uptime and OK message', async () => {
+      const result = await appController.getAlive();
+      expect(result).toEqual({
+        uptime: expect.any(Number),
+        message: 'OK',
+        timestamp: expect.any(Number),
+      });
     });
   });
 });

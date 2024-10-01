@@ -1,6 +1,6 @@
 import { ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { UserSession } from 'src/user/schemas/user.session.schema';
+import { UserSession } from '../user/schemas/user.session.schema';
 import { IJWT } from './interfaces/local-login-return.interface';
 import { jwtDecode } from 'jwt-decode';
 import { InjectModel } from '@nestjs/mongoose';
