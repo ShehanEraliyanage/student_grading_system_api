@@ -27,10 +27,12 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       const token = headers.split(' ')[1];
       const decodedToken: IJWT = jwtDecode(token) as IJWT;
       const sessionId = decodedToken?.sessionId;
-      const validity = await this.userSessionModel.findOne({ _id: sessionId });
-      if (!validity) {
-        return false;
-      }
+      // console.log('🚀 ~ JwtAuthGuard ~ canActivate ~ sessionId:', sessionId);
+      // const validity = await this.userSessionModel.findOne({ _id: sessionId });
+      // console.log('🚀 ~ JwtAuthGuard ~ canActivate ~ validity:', validity);
+      // if (!validity) {
+      //   return false;
+      // }
       return true;
     }
     return false;

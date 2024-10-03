@@ -9,16 +9,16 @@ import {
   UseInterceptors,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
-
-import { UserService } from './user.service';
-import { ClassValidationPipe } from '../common/pipes/class-validation.pipe';
-import { JwtAuthGuard } from './../auth/jwt-auth.guard';
-import { UserDocument } from './schemas/user.schema';
-import { GetUser } from '../common/decorators/get-user.decorator';
-import { IReqUserInfo } from '../auth/interfaces/req-user-info.interface';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { SanitizeMongooseModelInterceptor } from 'nestjs-mongoose-exclude';
 
+import { UserService } from './user.service';
+
+import { ClassValidationPipe } from '../common/pipes/class-validation.pipe';
+import { JwtAuthGuard } from './../auth/jwt-auth.guard';
+import { GetUser } from '../common/decorators/get-user.decorator';
+import { IReqUserInfo } from '../auth/interfaces/req-user-info.interface';
+import { UserDocument } from './schemas/user.schema';
 import { UserAddDto } from './dto/userAdd.dto';
 
 @ApiTags('users')

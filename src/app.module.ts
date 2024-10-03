@@ -14,6 +14,8 @@ import { AuthModule } from './auth/auth.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { serverConfig } from './config/server.config';
 import { winstonConfig } from './config/winston.config';
+import { StudentModule } from './student/student.module';
+import { ClassModule } from './class/class.module';
 
 const DB_URL =
   'mongodb+srv://studentGradingSystem:BTSnA0h76xIFuTE2@studentgradingsystem.6v3e5.mongodb.net/?retryWrites=true&w=majority&appName=StudentGradingSystem';
@@ -58,6 +60,8 @@ const DB_URL =
     WinstonModule.forRoot(winstonConfig),
     UserModule,
     AuthModule,
+    StudentModule,
+    ClassModule,
 
     // ConfigModule.forRoot({
     //   isGlobal: true,
